@@ -1,6 +1,6 @@
 package ru.itpark;
 
-import ru.itpark.comparator.FirmComparator;
+import ru.itpark.comparator.FirmIncComparator;
 import ru.itpark.comparator.PriceIncComparator;
 import ru.itpark.domain.Phone;
 import ru.itpark.domain.SmartPhone;
@@ -32,8 +32,8 @@ public class Main {
         service.add(new TV("TV","Sony", 100_000, 50));
         service.add(new TV("TV","Sony", 150_000, 54));
 
-        System.out.println(service.findByFirm("Apple").getSorted(new FirmComparator()));
-        System.out.println(service.findByCategory("Smartphone").getSorted(new FirmComparator()));
+        System.out.println(service.findByFirm("Apple").getSorted(new FirmIncComparator()));
+        System.out.println(service.findByCategory("Smartphone").getSorted(new FirmIncComparator()));
         System.out.println(service.getSorted(new PriceIncComparator()));
     }
 }
