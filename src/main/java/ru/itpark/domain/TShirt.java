@@ -1,6 +1,6 @@
 package ru.itpark.domain;
 
-public class TShirt extends Product{
+public class TShirt extends Product {
     private String size;
     private String colour;
 

@@ -1,13 +1,13 @@
 package ru.itpark;
 
-import ru.itpark.comparator.FirmIncComparator;
-import ru.itpark.comparator.PriceIncComparator;
 import ru.itpark.domain.Phone;
 import ru.itpark.domain.SmartPhone;
-import ru.itpark.domain.TShirt;
 import ru.itpark.domain.TV;
-import ru.itpark.repository.UlmartRepository;
 import ru.itpark.service.UlmartService;
+import ru.itpark.comparator.FirmIncComparator;
+import ru.itpark.comparator.PriceIncComparator;
+import ru.itpark.domain.TShirt;
+import ru.itpark.repository.UlmartRepository;
 
 public class Main {
     public static void main(String[] args) {
@@ -35,5 +35,6 @@ public class Main {
         System.out.println(service.findByFirm("Apple").getSorted(new FirmIncComparator()));
         System.out.println(service.findByCategory("Smartphone").getSorted(new FirmIncComparator()));
         System.out.println(service.getSorted(new PriceIncComparator()));
+
     }
 }

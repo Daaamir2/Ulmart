@@ -3,7 +3,6 @@ package ru.itpark.service;
 import ru.itpark.domain.Product;
 import ru.itpark.repository.UlmartRepository;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
