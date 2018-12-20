@@ -11,7 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UlmartServiceFindTest {
-    UlmartService service;
+    private UlmartService service;
     @BeforeEach
     void setUp() {
         UlmartRepository repository = new UlmartRepository();
