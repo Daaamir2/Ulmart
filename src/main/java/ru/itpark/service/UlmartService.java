@@ -3,47 +3,62 @@ package ru.itpark.service;
 import ru.itpark.domain.Product;
 import ru.itpark.repository.UlmartRepository;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
 public class UlmartService {
     private UlmartRepository repository;
 
-    public UlmartService(UlmartRepository repository){
+    public UlmartService(UlmartRepository repository) {
         this.repository = repository;
     }
 
-    public void add(Product product){
+    public void add(Product product) {
         repository.add(product);
     }
 
-    public List<Product> getAll(){
+    public List<Product> getAll() {
         return repository.getAll();
     }
 
-    public List<Product> getSorted(Comparator<Product> comparator){
+    public List<Product> getSorted(Comparator<Product> comparator) {
         List<Product> result = repository.getAll();
         result.sort(comparator);
         return result;
     }
 
-    public UlmartService findByFirm(String firm){
-        UlmartService service = new UlmartService(new UlmartRepository());
+    public List<Product> findByFirm(String firm) {
+        List<Product> result = new ArrayList<>();
+        List<String> findByFirmList = Arrays.asList(firm);
         for (Product product : repository.getAll()) {
-            if(product.getFirm().equalsIgnoreCase(firm)){
-                service.add(product);
+            if (findByFirmList.contains(product.getFirm())) {
+                result.add(product);
             }
         }
-        return service;
+        return result;
     }
 
-    public UlmartService findByCategory(String category){
-        UlmartService service = new UlmartService(new UlmartRepository());
+    public List<Product> findByCategory(String category) {
+        List<Product> result = new ArrayList<>();
+        List<String> findByCategoryList = Arrays.asList(category);
         for (Product product : repository.getAll()) {
-            if(product.getCategory().equalsIgnoreCase(category)){
-                service.add(product);
+            if (findByCategoryList.contains(product.getCategory())) {
+                result.add(product);
             }
         }
-        return service;
+        return result;
+    }
+
+    public List<Product> findByPriceRange(int priceMin, int priceMax) {
+        List<Product> result = new ArrayList<>();
+        for (Product product : repository.getAll()) {
+            if (product.getPrice() >= priceMin && product.getPrice() <= priceMax) {
+                result.add(product);
+            }
+        }
+        return result;
     }
 }
