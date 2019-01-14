@@ -8,7 +8,9 @@ import ru.itpark.comparator.PriceIncComparator;
 import ru.itpark.domain.*;
 import ru.itpark.repository.UlmartRepository;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,43 +34,34 @@ class UlmartServiceComparatorTest {
     @Test
     void findIncComparatorTest() {
         List<Product> sort = service.getSorted(new FirmIncComparator());
-        String[] result = new String[sort.size()];
-        int count = 0;
 
-        for (Product product : service.getAll()) {
-            result[count] = product.getFirm();
-            count++;
-        }
-        String[] expected = {"Apple", "H&M", "Nokia", "Sony", "Sony", "Sony"};
+        List<String> result = sort.stream()
+                .map(Product::getFirm)
+                .collect(Collectors.toList());
 
-        assertArrayEquals(expected, result);
+        List<String> expected = Arrays.asList("Apple", "H&M", "Nokia", "Sony", "Sony", "Sony");
+        assertEquals(expected, result);
     }
 
     @Test
     void priceDecComparatorTest() {
         List<Product> sort = service.getSorted(new PriceDecComparator());
-        int[] result = new int[sort.size()];
-        int count = 0;
-        for (Product product : service.getAll()) {
-            result[count] = product.getPrice();
-            count++;
-        }
-        int[] expected = {100_000, 80_000, 25_000, 15_000, 10_000, 1_000};
+        List<Integer> result = sort.stream()
+                .map(Product::getPrice)
+                .collect(Collectors.toList());
 
-        assertArrayEquals(expected, result);
+        List<Integer> expected = Arrays.asList(100_000, 80_000, 25_000, 15_000, 10_000, 1_000);
+        assertEquals(expected, result);
     }
 
     @Test
     void priceIncComparatorTest() {
         List<Product> sort = service.getSorted(new PriceIncComparator());
-        int[] result = new int[sort.size()];
-        int count = 0;
-        for (Product product : service.getAll()) {
-            result[count] = product.getPrice();
-            count++;
-        }
-        int[] expected = {1_000, 10_000, 15_000, 25_000, 80_000, 100_000};
+        List<Integer> result = sort.stream()
+                .map(Product::getPrice)
+                .collect(Collectors.toList());
 
-        assertArrayEquals(expected, result);
+        List<Integer> expected = Arrays.asList(1_000, 10_000, 15_000, 25_000, 80_000, 100_000);
+        assertEquals(expected, result);
     }
 }
